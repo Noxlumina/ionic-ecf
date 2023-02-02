@@ -1,0 +1,7 @@
+{
+    "name": "Localib",
+    "integrations": {
+      "capacitor": {}
+    },
+    "type": "vue"
+}

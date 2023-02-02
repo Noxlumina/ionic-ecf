@@ -1,0 +1,12 @@
+{
+  "appId": "com.example.app",
+  "appName": "Localib",
+  "webDir": "dist",
+  "bundledWebRuntime": true,
+  "server": {
+    "androidScheme": "http",
+    "allowNavigation": [
+      "http:/localhost:32290/locataires","http://127.0.0./1:5000/locations","http://127.0.0./1:5000/vehicules"
+    ]
+  }
+}

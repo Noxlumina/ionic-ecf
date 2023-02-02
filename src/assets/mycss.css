@@ -1,0 +1,84 @@
+.homebutton {
+    width: 300px;
+    margin: 3vh;
+    opacity: 0.7;
+}
+.button {
+    height: 50px;
+    width: 120px;
+}
+button :hover {
+    opacity: 1;
+}
+.card {
+    width: 100%;
+    height: auto;
+}
+.cardDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.form {
+    background-color: rgb(231, 231, 241);
+}
+.photo {
+    width: 100px;
+    height: 80px;
+}
+.row {
+    width: 100%;
+    margin-bottom: 1%;
+}
+.searchBar {
+    width: 170px;
+}
+.searchDiv {
+    display: flex;
+}
+.styleObject {
+    color: blue;
+}
+.tableBorder {
+    border: 2px solid back;
+}
+.titre {
+    text-decoration: underline;
+    color: rgba(31, 31, 136, 0.712);
+}
+.mainName{
+    font-size: x-large;
+    margin-left: 5%;
+}
+.logo {
+    height: 50px;
+    padding-left: 20px;
+    opacity: 0.5;
+  }
+  .logo:hover {
+    opacity: 1;
+  }
+  .background {
+    background-color: rgba(31, 31, 136, 0.712);
+    height: 100vh;
+  }
+  .nav {
+    background-color: rgba(31, 31, 136, 0.712);
+  }
+  .navItem:hover {
+    color: black;
+  }
+  .navItem {
+    color: white;
+    margin-left: 5%;
+    width: 20vw;
+  }
+  #app {
+    font-family: Roboto, Helvetica, Arial, sans-serif;}
