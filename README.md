@@ -14,13 +14,13 @@ puis créer son projet avec la commande "ionic start <nomduprojet>". Ensuite il 
 
 Après on peut installer directement capcitor à un projet déjà existant.
 La démarche est la suivante:
-effectuer les commandes --> "npm i @capacitor/core" /n
-                            "npm i -D @capacitor/cli"
-                            "npx cap init" pour créer le fichier "capacitor.config.json" où spécifie le dossier de build en entrée /n
-                            "npm i @capacitor/android @capacitor/ios" pour installer les platforms android et ios /n
-                            "npx cap add android" /n
-                            "npx cap add ios" pour créer les dossier android et ios dans notre projet /n
-                            "npx cap sync" pour synchroniser les dossier avec nos fichiers et dépendances installés /n
+effectuer les commandes --> - "npm i @capacitor/core" 
+                            - "npm i -D @capacitor/cli"
+                            - "npx cap init" pour créer le fichier "capacitor.config.json" où spécifie le dossier de build en entrée 
+                            - "npm i @capacitor/android @capacitor/ios" pour installer les platforms android et ios 
+                            - "npx cap add android" 
+                            - "npx cap add ios" pour créer les dossier android et ios dans notre projet 
+                            - "npx cap sync" pour synchroniser les dossier avec nos fichiers et dépendances installés 
 
 J'ai pas réussi à faire fonctionner totalement le projet sur android studio j'ai mon front qui ne communique pas avec le back de cette façon. 
 Il faut trouver comment faire communiquer le localhost avec le l'émulateur.
