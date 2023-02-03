@@ -1,6 +1,7 @@
 <style scoped src="../assets/mycss.css"></style>
 
 <template>
+  <IonPage>
   <div>
     <MDBBtn color="success" v-on:click="show" v-if="!isEditing"
       >Ajouter un véhicule</MDBBtn
@@ -199,6 +200,7 @@
       </div>
     </MDBTable>
   </div>
+  </IonPage>
 </template>
 
 <script>
@@ -206,11 +208,11 @@
 import { MDBInput, MDBBtn, MDBTable, MDBRadio } from "mdb-vue-ui-kit";
 import {
   IonCard,
-  // IonCardContent,
   IonCardHeader,
   IonCardTitle,
   IonItem,
   IonList,
+  IonPage
 } from "@ionic/vue";
 import { ref } from "vue";
 import axios from "axios";
@@ -288,11 +290,11 @@ export default {
     MDBTable,
     MDBRadio,
     IonCard,
-    // IonCardContent,
     IonCardHeader,
     IonCardTitle,
     IonItem,
     IonList,
+    IonPage
   },
   setup() {
     //initialisation de variables

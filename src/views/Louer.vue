@@ -1,180 +1,179 @@
 <style scoped src="../assets/mycss.css"></style>
 
-
 <template>
-  <!-- <form :class="$style.form" @submit.prevent="addLocation()"> -->
-  <form class="form">
-    <h1 class="titre form">Commencer une location</h1>
-    <div v-if="!isEditingVehicule">
-      <h2 class="titre">Choix du véhicule</h2>
-      <IonList>
-        <IonItem fill="solid" ref="item">
-          <MDBRow class="row">
-            <MDBCol>
-              <div>Marque : {{ marque }}</div>
-              <select v-model="marque">
-                <option disabled value="">---type---</option>
-                <option v-for="mark of marks" :key="mark">
-                  {{ mark }}
-                </option>
-              </select>
-            </MDBCol>
-            <MDBCol>
-              <div>Modèle : {{ modele }}</div>
-              <select v-model="modele">
-                <option disabled value="">---type---</option>
-                <option
-                  v-for="vehicule of vehicules"
-                  :key="vehicule._id"
-                  v-show="vehicule.marque == marque && vehicule.disponibilite == true"
+  <IonPage>
+    <form class="form">
+      <h1 class="titre form">Commencer une location</h1>
+      <div v-if="!isEditingVehicule">
+        <h2 class="titre">Choix du véhicule</h2>
+        <IonList>
+          <IonItem fill="solid" ref="item">
+            <MDBRow class="row">
+              <MDBCol>
+                <div>Marque : {{ marque }}</div>
+                <select v-model="marque">
+                  <option disabled value="">---type---</option>
+                  <option v-for="mark of marks" :key="mark">
+                    {{ mark }}
+                  </option>
+                </select>
+              </MDBCol>
+              <MDBCol>
+                <div>Modèle : {{ modele }}</div>
+                <select v-model="modele">
+                  <option disabled value="">---type---</option>
+                  <option
+                    v-for="vehicule of vehicules"
+                    :key="vehicule._id"
+                    v-show="vehicule.marque == marque && vehicule.disponibilite == true"
+                  >
+                    {{ vehicule.modele }}
+                  </option>
+                </select>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow class="row">
+              <MDBCol>
+                <div>Immatriculation : {{ immatriculation }}</div>
+                <select v-model="immatriculation">
+                  <option disabled value="">---type---</option>
+                  <option
+                    v-for="vehicule of vehicules"
+                    :key="vehicule._id"
+                    v-show="
+                      vehicule.marque == marque &&
+                      vehicule.modele == modele &&
+                      vehicule.disponibilite == true
+                    "
+                  >
+                    {{ vehicule.immatriculation }}
+                  </option>
+                </select>
+              </MDBCol>
+              <MDBCol>
+                <MDBBtn
+                  color="success"
+                  @:click="getByImmatriculation(immatriculation)"
+                  v-if="immatriculation != ''"
+                  >Je choisie ce véhicule</MDBBtn
                 >
-                  {{ vehicule.modele }}
-                </option>
-              </select>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow class="row">
-            <MDBCol>
-              <div>Immatriculation : {{ immatriculation }}</div>
-              <select v-model="immatriculation">
-                <option disabled value="">---type---</option>
-                <option
-                  v-for="vehicule of vehicules"
-                  :key="vehicule._id"
-                  v-show="
-                    vehicule.marque == marque &&
-                    vehicule.modele == modele &&
-                    vehicule.disponibilite == true
-                  "
-                >
-                  {{ vehicule.immatriculation }}
-                </option>
-              </select>
-            </MDBCol>
-            <MDBCol>
-              <MDBBtn
-                color="success"
-                @:click="getByImmatriculation(immatriculation)"
-                v-if="immatriculation != ''"
-                >Je choisie ce véhicule</MDBBtn
-              >
-            </MDBCol>
-          </MDBRow>
-        </IonItem>
-      </IonList>
-    </div>
-
-    <MDBTable captionTop v-else class="form">
-      <caption class="form">
-        <h2 class="titre">Véhicule choisi</h2>
-      </caption>
-      <div class="cardDiv">
-        <IonCard class="card">
-          <ion-card-header>
-            <img
-              v-bind:src="vehiculechoisi.photo"
-              alt="photo de vehicule"
-              class="photo"
-            />
-            <ion-card-title
-              >{{ vehiculechoisi.marque }} {{ vehiculechoisi.modele }} Immatriculation :
-              {{ vehiculechoisi.immatriculation }}
-            </ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            Etat du véhicule : {{ vehiculechoisi.etat }} Prix à la journée :
-            {{ vehiculechoisi.prix }} Disponibilité :
-            {{ vehiculechoisi.disponibilite }} Type du véhicule :
-            {{ vehiculechoisi.type }}
-          </ion-card-content>
-        </IonCard>
+              </MDBCol>
+            </MDBRow>
+          </IonItem>
+        </IonList>
       </div>
-    </MDBTable>
 
-    <div v-if="!isEditingLocataire">
-      <h2 class="titre">Choix du locataire</h2>
-      <IonList>
-        <IonItem fill="solid" ref="item">
-          <MDBRow class="row">
-            <MDBCol>
-              <div>Nom du locataire : {{ nom }}</div>
-              <select v-model="nom">
-                <option disabled value="">---type---</option>
-                <option v-for="locataire of locataires" :key="locataire.email">
-                  {{ locataire.nom }}
-                </option>
-              </select>
-            </MDBCol>
-            <MDBCol>
-              <div>Email : {{ email }}</div>
-              <select v-model="email">
-                <option disabled value="">---type---</option>
-                <option
-                  v-for="locataire of locataires"
-                  :key="locataire._id"
-                  v-show="locataire.nom == nom"
+      <MDBTable captionTop v-else class="form">
+        <caption class="form">
+          <h2 class="titre">Véhicule choisi</h2>
+        </caption>
+        <div class="cardDiv">
+          <IonCard class="card">
+            <ion-card-header>
+              <img
+                v-bind:src="vehiculechoisi.photo"
+                alt="photo de vehicule"
+                class="photo"
+              />
+              <ion-card-title
+                >{{ vehiculechoisi.marque }} {{ vehiculechoisi.modele }} Immatriculation :
+                {{ vehiculechoisi.immatriculation }}
+              </ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              Etat du véhicule : {{ vehiculechoisi.etat }} Prix à la journée :
+              {{ vehiculechoisi.prix }} Disponibilité :
+              {{ vehiculechoisi.disponibilite }} Type du véhicule :
+              {{ vehiculechoisi.type }}
+            </ion-card-content>
+          </IonCard>
+        </div>
+      </MDBTable>
+
+      <div v-if="!isEditingLocataire">
+        <h2 class="titre">Choix du locataire</h2>
+        <IonList>
+          <IonItem fill="solid" ref="item">
+            <MDBRow class="row">
+              <MDBCol>
+                <div>Nom du locataire : {{ nom }}</div>
+                <select v-model="nom">
+                  <option disabled value="">---type---</option>
+                  <option v-for="locataire of locataires" :key="locataire.email">
+                    {{ locataire.nom }}
+                  </option>
+                </select>
+              </MDBCol>
+              <MDBCol>
+                <div>Email : {{ email }}</div>
+                <select v-model="email">
+                  <option disabled value="">---type---</option>
+                  <option
+                    v-for="locataire of locataires"
+                    :key="locataire._id"
+                    v-show="locataire.nom == nom"
+                  >
+                    {{ locataire.email }}
+                  </option>
+                </select>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow class="$style.row">
+              <MDBCol>
+                <MDBBtn color="success" @:click="getByEmail(email)" v-if="email != ''"
+                  >Je choisie ce locataire</MDBBtn
                 >
-                  {{ locataire.email }}
-                </option>
-              </select>
-            </MDBCol>
-          </MDBRow>
-          <MDBRow class="$style.row">
-            <MDBCol>
-              <MDBBtn color="success" @:click="getByEmail(email)" v-if="email != ''"
-                >Je choisie ce locataire</MDBBtn
-              >
-              >
-            </MDBCol>
-          </MDBRow>
-        </IonItem>
-      </IonList>
-    </div>
-
-    <MDBTable captionTop v-if="isEditingLocataire" :class="$style.form">
-      <caption class="form">
-        <h1 class="titre">Locataire choisi</h1>
-      </caption>
-      <div class="cardDiv">
-        <IonCard class="card">
-          <ion-card-header>
-            <ion-card-title
-              >{{ locatairechoisi.nom }} {{ locatairechoisi.prenom }} 
-            </ion-card-title>
-          </ion-card-header>
-
-          <ion-card-content>
-            {{ locatairechoisi.email }}
-          </ion-card-content>
-        </IonCard>
+              </MDBCol>
+            </MDBRow>
+          </IonItem>
+        </IonList>
       </div>
-    </MDBTable>
 
-    <h2 class="titre">Choix des dates</h2>
-    <MDBRow class="row">
-      <MDBCol> <Datepicker v-model="date" range /></MDBCol>
-    </MDBRow>
-    <MDBBtn color="success" @:click="getPrice(date[0], date[1])"
-      >calcul du prix pour les dates choisies</MDBBtn
-    >
-    <p v-if="this.totalprice > 0">Le prix de la location est : {{ this.totalprice }}</p>
-    <MDBBtn color="success" @:click="addLocation(vehiculechoisi._id)"
-      >Valider la location</MDBBtn
-    >
-  </form>
+      <MDBTable captionTop v-if="isEditingLocataire" :class="$style.form">
+        <caption class="form">
+          <h1 class="titre">Locataire choisi</h1>
+        </caption>
+        <div class="cardDiv">
+          <IonCard class="card">
+            <ion-card-header>
+              <ion-card-title
+                >{{ locatairechoisi.nom }} {{ locatairechoisi.prenom }}
+              </ion-card-title>
+            </ion-card-header>
 
-  <MDBModal id="Modal" tabindex="-1" labelledby="ModalLabel" v-model="Modal">
-    <MDBModalHeader>
-      <MDBModalTitle id="ModalLabel"> Message d'erreur </MDBModalTitle>
-    </MDBModalHeader>
-    <MDBModalBody
-      >La date choisie et l'heure doivent être supérieur à ceux actuels</MDBModalBody
-    >
-    <MDBModalFooter>
-      <MDBBtn color="secondary" @click="Modal = false">Close</MDBBtn>
-    </MDBModalFooter>
-  </MDBModal>
+            <ion-card-content>
+              {{ locatairechoisi.email }}
+            </ion-card-content>
+          </IonCard>
+        </div>
+      </MDBTable>
+
+      <h2 class="titre">Choix des dates</h2>
+      <MDBRow class="row">
+        <MDBCol> <Datepicker v-model="date" range /></MDBCol>
+      </MDBRow>
+      <MDBBtn color="success" @:click="getPrice(date[0], date[1])"
+        >calcul du prix pour les dates choisies</MDBBtn
+      >
+      <p v-if="this.totalprice > 0">Le prix de la location est : {{ this.totalprice }}</p>
+      <MDBBtn color="success" @:click="addLocation(vehiculechoisi._id)"
+        >Valider la location</MDBBtn
+      >
+    </form>
+
+    <MDBModal id="Modal" tabindex="-1" labelledby="ModalLabel" v-model="Modal">
+      <MDBModalHeader>
+        <MDBModalTitle id="ModalLabel"> Message d'erreur </MDBModalTitle>
+      </MDBModalHeader>
+      <MDBModalBody
+        >La date choisie et l'heure doivent être supérieur à ceux actuels</MDBModalBody
+      >
+      <MDBModalFooter>
+        <MDBBtn color="secondary" @click="Modal = false">Close</MDBBtn>
+      </MDBModalFooter>
+    </MDBModal>
+  </IonPage>
 </template>
 
 <script>
@@ -188,9 +187,9 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter,
-  IonItem,
-  IonList,
 } from "mdb-vue-ui-kit";
+import { IonItem, IonList, IonPage } from "@ionic/vue";
+
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import Datepicker from "@vuepic/vue-datepicker";
@@ -340,6 +339,7 @@ export default {
     MDBModalFooter,
     IonItem,
     IonList,
+    IonPage,
   },
   setup() {
     //vehicules

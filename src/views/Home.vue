@@ -1,15 +1,18 @@
-<style scoped src="../assets/mycss.css">
-</style>
+<style scoped src="../assets/mycss.css"></style>
 
 <template>
-  <Bienvenue/>
-  <ActionButton/>
+  <IonPage>
+    <Bienvenue />
+    <ActionButton />
+  </IonPage>
 </template>
 
 <script>
-    //import des composants
+//import des composants
 import ActionButton from "../components/Home/ActionButton.vue";
 import Bienvenue from "../components/Home/Bienvenue.vue";
+import { IonPage } from "@ionic/vue";
+
 export default {
   data() {
     return {};
@@ -18,7 +21,8 @@ export default {
   components: {
     //composant utilisé
     ActionButton,
-    Bienvenue
-},
+    Bienvenue,
+    IonPage,
+  },
 };
 </script>

@@ -1,14 +1,17 @@
 <style scoped src="../assets/mycss.css"></style>
 
 <template>
-  <MDBBtn color="primary" @:click="goToVehicules()"> Retour </MDBBtn>
-  <ModifyVehicule />
+  <IonPage>
+    <MDBBtn color="primary" @:click="goToVehicules()"> Retour </MDBBtn>
+    <ModifyVehicule />
+  </IonPage>
 </template>
 
 <script>
 // import des composants utilisés
 import { MDBBtn } from "mdb-vue-ui-kit";
 import ModifyVehicule from "../components/Vehicule/ModifyVehicule.vue";
+import { IonPage } from "@ionic/vue";
 
 export default {
   // initialisation de variables
@@ -33,6 +36,7 @@ export default {
 
     MDBBtn,
     ModifyVehicule,
+    IonPage,
   },
 };
 </script>
