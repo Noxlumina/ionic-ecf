@@ -13,7 +13,7 @@
   "dependencies": {
     "@capacitor/android": "^4.6.2",
     "@capacitor/core": "^4.6.2",
-    "@capacitor/ios": "^4.6.2",
+    "@capacitor/ios": "^4.8.1",
     "@ionic/vue": "^6.5.2",
     "@vuepic/vue-datepicker": "^3.5.2",
     "axios": "^1.1.2",
